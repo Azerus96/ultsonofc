@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_socketio import SocketIO
-from app.game.game import Game  # Добавьте этот импорт
+from app.game import Game  # Изменен импорт
 import os
 
 socketio = SocketIO()
-game_instance = Game()  # Создайте экземпляр игры здесь
+game_instance = Game()  # Создаем экземпляр игры
 
 def create_app(test_config=None):
     app = Flask(__name__)
