@@ -1,13 +1,15 @@
 from flask import Flask
 from flask_socketio import SocketIO
-from app.game import Game  # Изменен импорт
+from app.game import Game
 import os
 
-socketio = SocketIO()
-game_instance = Game()  # Создаем экземпляр игры
+socketio = SocketIO(cors_allowed_origins="*", async_mode='eventlet')
+game_instance = Game()
 
 def create_app(test_config=None):
-    app = Flask(__name__)
+    app = Flask(__name__,
+                template_folder='../templates',  # Путь к папке с шаблонами
+                static_folder='../static')       # Путь к статическим файлам
     
     if test_config is None:
         app.config.from_mapping(
