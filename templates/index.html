@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chinese Poker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-player-id="{{ player_id }}">
+    <button class="fullscreen-btn" onclick="toggleFullScreen()">
+        <span class="material-icons">fullscreen</span>
+    </button>
+
+    <div class="game-container">
+        <!-- Статус игры -->
+        <div class="game-status" id="game-status">
+            Ожидание игроков...
+        </div>
+
+        <!-- Стол оппонента -->
+        <div class="opponent-table">
+            <div class="row" id="opponent-top-row"></div>
+            <div class="row" id="opponent-middle-row"></div>
+            <div class="row" id="opponent-bottom-row"></div>
+        </div>
+
+        <!-- Счет -->
+        <div class="score-board" id="score-board"></div>
+
+        <!-- Стол игрока -->
+        <div class="player-table">
+            <div class="row" id="top-row"></div>
+            <div class="row" id="middle-row"></div>
+            <div class="row" id="bottom-row"></div>
+        </div>
+
+        <!-- Контролы -->
+        <div class="controls">
+            <button id="ready-btn" class="btn">Готов</button>
+            <button id="draw-btn" class="btn">Взять карты</button>
+        </div>
+
+        <!-- Рука игрока -->
+        <div id="hand" class="hand"></div>
+
+        <!-- Таймер -->
+        <div id="timer" class="timer"></div>
+
+        <!-- Чат -->
+        <div class="chat-container">
+            <div class="chat-messages" id="chat-box"></div>
+            <form id="chat-form" class="chat-input">
+                <input type="text" id="chat-input" placeholder="Введите сообщение...">
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальные окна -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <h2>Правила игры</h2>
+            <div class="rules-text">
+                <!-- Текст правил -->
+            </div>
+            <button class="modal-close">Закрыть</button>
+        </div>
+    </div>
+
+    <div id="combination-modal" class="modal">
+        <div class="modal-content">
+            <h2>Комбинации</h2>
+            <div class="combinations-list">
+                <!-- Список комбинаций -->
+            </div>
+            <button class="modal-close">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Шаблоны для динамического контента -->
+    <template id="card-template">
+        <div class="card" draggable="true">
+            <span class="card-value"></span>
+        </div>
+    </template>
+
+    <template id="card-slot-template">
+        <div class="card-slot"></div>
+    </template>
+
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+    <script>
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const animations = new GameAnimations();
+            const ui = new GameUI(animations);
+            const gameClient = new GameClient();
+            
+            // Делаем gameClient доступным глобально для обработчиков событий
+            window.gameClient = gameClient;
+            
+            // Инициализация игры
+            gameClient.init('{{ player_id }}');
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
