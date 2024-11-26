@@ -1,8 +1,6 @@
-from flask_socketio import SocketIO, emit
-from .. import game_instance
-import json
-
-socketio = SocketIO()
+from flask_socketio import emit
+from .. import socketio, game_instance  # Импортируем socketio из __init__.py
+from flask import request  # Добавляем импорт request
 
 @socketio.on('connect')
 def handle_connect():
@@ -75,5 +73,4 @@ def handle_chat_message(data):
 @socketio.on('disconnect')
 def handle_disconnect():
     """Обработка отключения клиента"""
-    # Можно добавить логику обработки отключения игрока
     pass
