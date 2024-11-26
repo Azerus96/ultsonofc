@@ -6,8 +6,8 @@ from github import Github
 from typing import Dict, Optional
 
 class ProgressSerializer:
-    def __init__(self, player_id: str):
-        self.token = os.environ.get('AI_PROGRESS_TOKEN')
+    def __init__(self, player_id: str, token: Optional[str] = None):
+        self.token = token or os.environ.get('AI_PROGRESS_TOKEN')
         if not self.token:
             raise ValueError("AI_PROGRESS_TOKEN not found in environment variables")
             
