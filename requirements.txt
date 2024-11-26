@@ -1,0 +1,14 @@
+flask==2.3.3
+flask-socketio==5.3.6
+python-dotenv==1.0.0
+eventlet==0.33.3
+numpy==1.24.3
+torch==2.0.1
+python-engineio==4.7.1
+python-socketio==5.9.0
+gunicorn==21.2.0
+redis==5.0.0
+pytest==7.4.2
+pytest-cov==4.1.0
+requests==2.31.0
+PyGithub==2.1.1
