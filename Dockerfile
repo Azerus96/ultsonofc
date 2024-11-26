@@ -17,7 +17,7 @@ ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
 # Открываем порт
-EXPOSE 5000
+EXPOSE 10000
 
 # Запускаем приложение
 CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "--bind", "0.0.0.0:5000", "--timeout", "120", "run:app"]
