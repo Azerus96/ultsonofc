@@ -23,7 +23,7 @@ class Game:
         self.player_manager = PlayerManager()
         self.state = GameState.WAITING
         self.current_street = 0
-        self.ai_agent = MCCFRAgent()
+        self.ai_agent = MCCFRAgent(player_id="ai_player")
         self.current_player_id: Optional[str] = None
         self.timer_task: Optional[asyncio.Task] = None
         self.fantasy_players: List[str] = []
