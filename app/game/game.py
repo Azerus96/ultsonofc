@@ -1,9 +1,9 @@
 from typing import Dict, List, Optional
-from deck import Deck, Card
-from player import Player, PlayerManager
-from hand import Hand
-from utils.scorer import ScoreCalculator
-from ai.mccfr import MCCFRAgent
+from .deck import Deck, Card
+from .player import Player, PlayerManager
+from .hand import Hand
+from ..utils.scorer import ScoreCalculator
+from ..ai.mccfr import MCCFRAgent
 import asyncio
 import logging
 
